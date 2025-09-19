@@ -4,6 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Warning:
+ * - Avoid using Object as a field type.
+ * - Do not allow unknown fields.
+ */
 @Getter @Setter @NoArgsConstructor
 public class MyEntity
 {

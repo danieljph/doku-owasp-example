@@ -16,6 +16,14 @@ public class BCryptExample
 {
     public static void main(String[] args)
     {
+        /*
+         * BCrypt Output Explanation: $2a$12$YFVJLaQwWOLSLHteNkOGTuxYK4X/W7S1YxWDrojYxOjZM4RHQCIbC
+         * $2a : Identifier for BCrypt algorithm
+         * $12 : Parameter for number of rounds, here 2^12 rounds
+         * YFVJLaQwWOLSLHteNkOGTu : The first 22 characters are Salt (128 bits).
+         * xYK4X/W7S1YxWDrojYxOjZM4RHQCIbC : Actual hash value (184 bits)
+         */
+
         int strengthAsSlowFactor = 12; // The valid range is 4 to 31. The work factor increases as 2^strength.
         BCryptPasswordEncoder byBCryptPasswordEncoder = new BCryptPasswordEncoder(strengthAsSlowFactor);
 
