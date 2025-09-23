@@ -9,10 +9,15 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
 
+/**
+ * @author Daniel Joi Partogi Hutapea
+ */
 public class AesGcmExample
 {
     private static final int GCM_IV_LENGTH = 12; // 96 bits
     private static final int GCM_TAG_LENGTH = 16; // 128 bits
+
+    private static final String staticIvAsBase64 = "ghPl7oIdbFJi1nQv";
 
     public static SecretKey generateAesKey() throws Exception
     {
@@ -23,9 +28,21 @@ public class AesGcmExample
 
     public static byte[] generateIv()
     {
-        byte[] iv = new byte[GCM_IV_LENGTH];
-        new SecureRandom().nextBytes(iv);
-        return iv;
+        return generateIv(true);
+    }
+
+    public static byte[] generateIv(boolean randomIv)
+    {
+        if(randomIv)
+        {
+            byte[] iv = new byte[GCM_IV_LENGTH];
+            new SecureRandom().nextBytes(iv);
+            return iv;
+        }
+        else
+        {
+            return Base64.getDecoder().decode(staticIvAsBase64);
+        }
     }
 
     public static String encrypt(String plaintext, SecretKey key, byte[] iv) throws Exception
@@ -80,12 +97,13 @@ public class AesGcmExample
             System.out.println("Decrypted Text         : " + decryptedText);
         }
 
+        SecretKey aesKey = generateAesKey();
+        byte[] iv = generateIv(false); // Remember to explain IV must be unique per encryption.
+
         for(int i=0; i<5; i++)
         {
             System.out.println("=======================================");
 
-            SecretKey aesKey = generateAesKey();
-            byte[] iv = generateIv();
             String originalText = "Hi!";
 
             String encryptedText = encrypt(originalText, aesKey, iv);

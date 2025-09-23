@@ -8,6 +8,8 @@ import lombok.Setter;
  * Warning:
  * - Avoid using Object as a field type.
  * - Do not allow unknown fields.
+ *
+ * @author Daniel Joi Partogi Hutapea
  */
 @Getter @Setter @NoArgsConstructor
 public class MyEntity

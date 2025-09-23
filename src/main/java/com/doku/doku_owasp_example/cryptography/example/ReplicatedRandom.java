@@ -97,20 +97,46 @@ public class ReplicatedRandom extends Random
         return false;
     }
 
+    @SuppressWarnings("ConstantValue")
     public static void main(String[] args)
     {
-        // Ask the audience to generate 5 random numbers using Java Math.random().
-        // Ask them to give you the first value and put it on variable firstValue.
-        // Ask them if the random numbers are the same.
-
-        double firstValue = 0.44629176353294553;
-
-        ReplicatedRandom rr = new ReplicatedRandom();
-        rr.replicateState(firstValue);
-
-        for(int i = 0; i < 5; i++)
+        if(true)
         {
-            System.out.println(rr.nextDouble());
+            // Replicate double
+
+            // Ask the audience to generate 5 random numbers using Java Math.random().
+            // Ask them to give you the first value and put it on variable firstValue.
+            // Ask them if the random numbers are the same.
+
+            double firstValue = 0.44629176353294553;
+
+            ReplicatedRandom rr = new ReplicatedRandom();
+            rr.replicateState(firstValue);
+
+            for(int i = 0; i < 5; i++)
+            {
+                System.out.println(rr.nextDouble());
+            }
+        }
+
+        if(false)
+        {
+            // Replicate int
+
+            // Ask the audience to generate 5 random numbers using Java new Random().nextInt().
+            // Ask them to give you the first and second value and put it on variable firstNextInt and secondNextInt.
+            // Ask them if the random numbers are the same.
+
+            int firstNextInt = 471594631;
+            int secondNextInt = 918387687;
+
+            ReplicatedRandom rr = new ReplicatedRandom();
+            rr.replicateState(firstNextInt, secondNextInt);
+
+            for(int i = 0; i < 5; i++)
+            {
+                System.out.println(rr.nextInt());
+            }
         }
     }
 }

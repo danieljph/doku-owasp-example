@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 
+/**
+ * @author Daniel Joi Partogi Hutapea
+ */
 @Setter @Getter @NoArgsConstructor
 public class MyData implements Serializable
 {

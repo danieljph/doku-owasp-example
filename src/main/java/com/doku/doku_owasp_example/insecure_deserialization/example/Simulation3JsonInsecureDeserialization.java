@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
  * 3. Do not allow unknown fields.
  * 4. Upgrade to the latest version of Jackson. This issue has been fixed in Jackson 2.8.9 and later.
  * 5. Disable enableDefaultTyping.
+ *
+ * @author Daniel Joi Partogi Hutapea
  */
 @Slf4j
 public class Simulation3JsonInsecureDeserialization
