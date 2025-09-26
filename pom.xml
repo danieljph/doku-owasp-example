@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.10-FINAL</version>
+            <version>3.5-FINAL</version>
         </dependency>
 
         <dependency>
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
+            <version>1.18.42</version>
             <scope>provided</scope>
         </dependency>
         <!-- endregion -->
@@ -129,7 +129,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.16</version>
+                            <version>1.18.42</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
