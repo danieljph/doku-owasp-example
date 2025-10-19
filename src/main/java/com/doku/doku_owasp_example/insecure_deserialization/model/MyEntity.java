@@ -1,5 +1,6 @@
 package com.doku.doku_owasp_example.insecure_deserialization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
  * @author Daniel Joi Partogi Hutapea
  */
 @Getter @Setter @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MyEntity
 {
     private int umur;

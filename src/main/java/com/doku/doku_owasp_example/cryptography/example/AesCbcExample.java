@@ -39,8 +39,11 @@ public class AesCbcExample
                 cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParameterSpec);
             }
 
-            byte[] cipherText = cipher.doFinal(plaintext.getBytes());
-            return Base64.getEncoder().encodeToString(cipherText);
+            byte[] ciphertext = cipher.doFinal(plaintext.getBytes());
+            var ciphertextBase64 = Base64.getEncoder().encodeToString(ciphertext);
+
+            var ivBase64 = Base64.getEncoder().encodeToString(ivParameterSpec.getIV());
+            return ivBase64 + "." + ciphertextBase64;
         }
         catch(GeneralSecurityException ex)
         {
@@ -52,13 +55,22 @@ public class AesCbcExample
     /**
      * Send ivParameterSpec = null if the algorithm does not support IV.
      */
-    public static String decrypt(String ciphertext, String algorithm, SecretKey secretKey, IvParameterSpec ivParameterSpec)
+    public static String decrypt(String ciphertextWithIv, String algorithm, SecretKey secretKey)
     {
         try
         {
+            var ciphertextEl = ciphertextWithIv.split("[.]");
+            var ivBase64 = ciphertextEl[0];
+            var ciphertextBase64 = ciphertextEl[1];
+
+            var iv = Base64.getDecoder().decode(ivBase64);
+            var ciphertext = Base64.getDecoder().decode(ciphertextBase64);
+
+            var ivParameterSpec = new IvParameterSpec(iv);
+
             Cipher cipher = Cipher.getInstance(algorithm);
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivParameterSpec);
-            byte[] plaintext = cipher.doFinal(Base64.getDecoder().decode(ciphertext.trim()));
+            byte[] plaintext = cipher.doFinal(ciphertext);
             return new String(plaintext);
         }
         catch(GeneralSecurityException ex)
@@ -98,7 +110,7 @@ public class AesCbcExample
             System.out.println("Original Text          : " + originalText);
             System.out.println("Encrypted Text (Base64): " + encryptedText);
 
-            String decryptedText = decrypt(encryptedText, "AES/CBC/PKCS5Padding", aesKey, iv);
+            String decryptedText = decrypt(encryptedText, "AES/CBC/PKCS5Padding", aesKey);
             System.out.println("Decrypted Text         : " + decryptedText);
 
             System.out.println("---------------------------------------\n");
